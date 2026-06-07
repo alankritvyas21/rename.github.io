@@ -15,110 +15,137 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg: #090b10;
+            --card: rgba(18, 20, 28, 0.9);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --muted: #9ca3af;
+            --primary: #6d7cff;
+            --primary2: #8b5cf6;
+        }
+
         body {
             min-height: 100vh;
-            padding: 30px;
             font-family: Inter, Arial, sans-serif;
-            color: #fff;
+            color: var(--text);
             background:
                 radial-gradient(circle at top left,
-                    #24324f,
-                    #131313 50%);
+                    #1d3557,
+                    #0b0d13 40%,
+                    #050608 100%);
+            padding: 16px;
         }
 
         .container {
-            max-width: 900px;
+            width: 100%;
+            max-width: 700px;
             margin: auto;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--card);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .4);
+            padding: 24px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45);
         }
 
-        h1 {
-            margin-bottom: 10px;
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
             font-size: 32px;
+            margin-bottom: 8px;
         }
 
-        .subtitle {
-            opacity: .7;
-            margin-bottom: 25px;
+        .header p {
+            color: var(--muted);
+            font-size: 14px;
         }
 
         .dropzone {
-            border: 2px dashed #6b7cff;
+            position: relative;
+            border: 2px dashed rgba(109, 124, 255, 0.6);
             border-radius: 20px;
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
             cursor: pointer;
-            transition: .3s;
+            transition: 0.3s;
             margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .dropzone:hover,
         .dropzone.dragover {
-            background: rgba(107, 124, 255, .12);
+            background: rgba(109, 124, 255, 0.08);
         }
 
         .dropzone input {
             display: none;
         }
 
-        .dropzone h3 {
+        .dropzone .icon {
+            font-size: 42px;
             margin-bottom: 10px;
         }
 
+        .dropzone h3 {
+            margin-bottom: 6px;
+        }
+
         .dropzone p {
-            opacity: .7;
+            color: var(--muted);
+            font-size: 14px;
         }
 
         .file-count {
-            color: #8fb3ff;
-            font-weight: 600;
+            text-align: center;
+            color: #9fb4ff;
             margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
-        input[type=text],
-        input[type=number] {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
-            height: 55px;
-            border: none;
-            outline: none;
+            height: 56px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
-            padding: 0 16px;
-            background: rgba(255, 255, 255, .08);
             color: white;
+            padding: 0 16px;
+            outline: none;
             font-size: 15px;
         }
 
         input::placeholder {
-            color: rgba(255, 255, 255, .5);
+            color: #8b93a7;
         }
 
         .btn {
             width: 100%;
-            height: 55px;
+            height: 56px;
             border: none;
             border-radius: 14px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
             color: white;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
             background: linear-gradient(
                 135deg,
-                #6b7cff,
-                #8a5cff
+                var(--primary),
+                var(--primary2)
             );
-            transition: .3s;
+            transition: 0.3s;
         }
 
         .btn:hover {
@@ -131,11 +158,11 @@
         }
 
         .progress-wrapper {
-            margin-top: 20px;
+            margin-top: 18px;
             height: 10px;
+            background: rgba(255,255,255,.08);
             border-radius: 999px;
             overflow: hidden;
-            background: rgba(255, 255, 255, .1);
         }
 
         .progress-bar {
@@ -144,30 +171,34 @@
             border-radius: inherit;
             background: linear-gradient(
                 90deg,
-                #6b7cff,
-                #8a5cff
+                var(--primary),
+                var(--primary2)
             );
             transition: width .3s ease;
         }
 
         .status {
             margin-top: 10px;
-            font-size: 14px;
-            color: #8fb3ff;
+            text-align: center;
+            color: #9fb4ff;
+            font-size: 13px;
         }
 
         .preview {
-            margin-top: 25px;
-            max-height: 320px;
+            margin-top: 20px;
+            max-height: 300px;
             overflow-y: auto;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, .03);
+            border-radius: 14px;
+            background: rgba(255,255,255,.03);
+            border: 1px solid var(--border);
         }
 
         .preview li {
             list-style: none;
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+            word-break: break-word;
+            font-size: 14px;
         }
 
         .preview li:last-child {
@@ -175,16 +206,54 @@
         }
 
         @media (max-width: 768px) {
+
             body {
-                padding: 15px;
+                padding: 12px;
             }
 
             .card {
-                padding: 20px;
+                padding: 18px;
+                border-radius: 20px;
             }
 
-            h1 {
-                font-size: 26px;
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .dropzone {
+                padding: 28px 14px;
+            }
+
+            .dropzone .icon {
+                font-size: 36px;
+            }
+
+            .dropzone h3 {
+                font-size: 18px;
+            }
+
+            .dropzone p {
+                font-size: 13px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            .btn {
+                height: 52px;
+                font-size: 16px;
+            }
+
+            .preview {
+                max-height: 220px;
+            }
+
+            .preview li {
+                font-size: 13px;
+                padding: 10px 12px;
             }
         }
     </style>
@@ -193,18 +262,28 @@
 <body>
 
     <div class="container">
+
         <div class="card">
 
-            <h1>📸 Bulk Image Renamer Pro</h1>
-            <div class="subtitle">
-                Rename hundreds of images instantly and download as ZIP.
+            <div class="header">
+                <h1>📸 Bulk Image Renamer</h1>
+                <p>Rename hundreds of images and download them as a ZIP</p>
             </div>
 
             <label class="dropzone" id="dropzone">
-                <input type="file" id="files" multiple accept="image/*">
+
+                <input
+                    type="file"
+                    id="files"
+                    multiple
+                    accept="image/*">
+
+                <div class="icon">📁</div>
 
                 <h3>Drag & Drop Images</h3>
-                <p>or click to browse</p>
+
+                <p>or tap here to browse</p>
+
             </label>
 
             <div class="file-count" id="fileCount">
@@ -215,14 +294,14 @@
                 <input
                     type="text"
                     id="prefix"
-                    placeholder="Prefix (e.g. MC)">
+                    placeholder="Prefix (Example: MC)">
             </div>
 
             <div class="input-group">
                 <input
                     type="number"
                     id="startNumber"
-                    placeholder="Start Number (e.g. 1)">
+                    placeholder="Start Number (Example: 1)">
             </div>
 
             <button
@@ -244,52 +323,62 @@
             <ul class="preview" id="preview"></ul>
 
         </div>
+
     </div>
 
     <script>
 
-        const filesInput =
-            document.getElementById('files');
-
-        const dropzone =
-            document.getElementById('dropzone');
+        const fileInput =
+            document.getElementById("files");
 
         const fileCount =
-            document.getElementById('fileCount');
+            document.getElementById("fileCount");
 
-        filesInput.addEventListener(
-            'change',
+        const dropzone =
+            document.getElementById("dropzone");
+
+        fileInput.addEventListener(
+            "change",
             updateCount
         );
 
         function updateCount() {
+
+            const total =
+                fileInput.files.length;
+
             fileCount.textContent =
-                `${filesInput.files.length} image(s) selected`;
+                total === 0
+                    ? "No files selected"
+                    : `${total} image(s) selected`;
         }
 
         dropzone.addEventListener(
-            'dragover',
+            "dragover",
             (e) => {
                 e.preventDefault();
-                dropzone.classList.add('dragover');
+                dropzone.classList.add("dragover");
             }
         );
 
         dropzone.addEventListener(
-            'dragleave',
+            "dragleave",
             () => {
-                dropzone.classList.remove('dragover');
+                dropzone.classList.remove("dragover");
             }
         );
 
         dropzone.addEventListener(
-            'drop',
+            "drop",
             (e) => {
+
                 e.preventDefault();
 
-                dropzone.classList.remove('dragover');
+                dropzone.classList.remove(
+                    "dragover"
+                );
 
-                filesInput.files =
+                fileInput.files =
                     e.dataTransfer.files;
 
                 updateCount();
@@ -299,61 +388,60 @@
         async function renameAndZip() {
 
             const files =
-                Array.from(filesInput.files);
+                Array.from(fileInput.files);
 
             const prefix =
-                document.getElementById('prefix')
+                document
+                    .getElementById("prefix")
                     .value.trim();
 
             const startNumber =
                 parseInt(
                     document.getElementById(
-                        'startNumber'
+                        "startNumber"
                     ).value
                 );
 
             const preview =
                 document.getElementById(
-                    'preview'
+                    "preview"
                 );
 
             const progressBar =
                 document.getElementById(
-                    'progressBar'
+                    "progressBar"
                 );
 
             const status =
                 document.getElementById(
-                    'status'
+                    "status"
                 );
 
-            const btn =
+            const button =
                 document.getElementById(
-                    'renameBtn'
+                    "renameBtn"
                 );
 
-            preview.innerHTML = '';
+            preview.innerHTML = "";
 
             if (
-                files.length === 0 ||
+                !files.length ||
                 !prefix ||
                 isNaN(startNumber)
             ) {
                 alert(
-                    'Please select files and fill all fields.'
+                    "Please select images and fill all fields."
                 );
                 return;
             }
 
-            btn.disabled = true;
+            button.disabled = true;
 
             files.sort((a, b) =>
                 a.name.localeCompare(
                     b.name,
                     undefined,
-                    {
-                        numeric: true
-                    }
+                    { numeric: true }
                 )
             );
 
@@ -367,52 +455,51 @@
 
                 const file = files[i];
 
-                const ext =
-                    file.name.split('.').pop();
+                const extension =
+                    file.name.split(".").pop();
 
                 const newName =
-                    `${prefix} (${startNumber + i}).${ext}`;
+                    `${prefix} (${startNumber + i}).${extension}`;
 
                 if (i < 20) {
                     preview.innerHTML +=
                         `<li>${newName}</li>`;
                 }
 
-                const buffer =
-                    await file.arrayBuffer();
-
                 zip.file(
                     newName,
-                    buffer
+                    await file.arrayBuffer()
                 );
 
                 const progress =
-                    ((i + 1) / files.length) * 50;
+                    ((i + 1) /
+                        files.length) * 50;
 
                 progressBar.style.width =
-                    progress + '%';
+                    progress + "%";
 
                 status.textContent =
-                    `Processing ${i + 1} / ${files.length}`;
+                    `Processing ${i + 1} of ${files.length}`;
             }
 
             status.textContent =
-                'Creating ZIP...';
+                "Creating ZIP...";
 
             const blob =
                 await zip.generateAsync(
                     {
-                        type: 'blob',
-                        compression: 'DEFLATE',
+                        type: "blob",
+                        compression: "DEFLATE",
                         compressionOptions: {
                             level: 6
                         }
                     },
                     (metadata) => {
+
                         progressBar.style.width =
                             (50 +
                                 metadata.percent / 2)
-                            + '%';
+                            + "%";
                     }
                 );
 
@@ -420,11 +507,11 @@
                 URL.createObjectURL(blob);
 
             const a =
-                document.createElement('a');
+                document.createElement("a");
 
             a.href = url;
             a.download =
-                'renamed-images.zip';
+                "renamed-images.zip";
 
             document.body.appendChild(a);
 
@@ -435,16 +522,16 @@
             URL.revokeObjectURL(url);
 
             progressBar.style.width =
-                '100%';
+                "100%";
 
             status.textContent =
-                `Completed! ${files.length} files renamed and downloaded.`;
+                `Completed! ${files.length} images renamed.`;
 
-            btn.disabled = false;
+            button.disabled = false;
         }
 
     </script>
 
 </body>
 
-</html>
+    </html>
