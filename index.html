@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulk Image Renamer Pro</title>
+    <title>Bulk Image Renamer</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
@@ -15,99 +15,92 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #090b10;
-            --card: rgba(18, 20, 28, 0.9);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --muted: #9ca3af;
-            --primary: #6d7cff;
-            --primary2: #8b5cf6;
-        }
-
         body {
             min-height: 100vh;
             font-family: Inter, Arial, sans-serif;
-            color: var(--text);
             background:
                 radial-gradient(circle at top left,
-                    #1d3557,
-                    #0b0d13 40%,
-                    #050608 100%);
+                    #16213e,
+                    #0a0f1f 45%,
+                    #05070d);
+            color: #fff;
             padding: 16px;
         }
 
         .container {
-            width: 100%;
-            max-width: 700px;
-            margin: auto;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .card {
-            background: var(--card);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border);
+            background: rgba(12, 17, 30, .92);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,.08);
             border-radius: 24px;
-            padding: 24px;
+            padding: 20px;
             box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.45);
+                0 20px 40px rgba(0,0,0,.35);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 32px;
+            font-size: 30px;
             margin-bottom: 8px;
         }
 
         .header p {
-            color: var(--muted);
+            color: #9ea6bc;
             font-size: 14px;
         }
 
-        .dropzone {
-            position: relative;
-            border: 2px dashed rgba(109, 124, 255, 0.6);
-            border-radius: 20px;
-            padding: 40px 20px;
+        .upload-box {
+            border: 2px dashed rgba(123, 138, 255, .5);
+            border-radius: 18px;
+            background: rgba(255,255,255,.03);
             text-align: center;
+            padding: 24px 16px;
             cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 20px;
-            overflow: hidden;
+            transition: .3s;
         }
 
-        .dropzone:hover,
-        .dropzone.dragover {
-            background: rgba(109, 124, 255, 0.08);
+        .upload-box:hover {
+            background: rgba(123,138,255,.08);
         }
 
-        .dropzone input {
+        .upload-box.dragover {
+            background: rgba(123,138,255,.12);
+            border-color: #7b8aff;
+        }
+
+        .upload-box input {
             display: none;
         }
 
-        .dropzone .icon {
-            font-size: 42px;
+        .upload-icon {
+            font-size: 52px;
             margin-bottom: 10px;
         }
 
-        .dropzone h3 {
-            margin-bottom: 6px;
+        .upload-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
-        .dropzone p {
-            color: var(--muted);
+        .upload-subtitle {
+            color: #9ea6bc;
             font-size: 14px;
         }
 
         .file-count {
             text-align: center;
-            color: #9fb4ff;
-            margin-bottom: 20px;
+            color: #a9b7ff;
             font-weight: 600;
+            margin: 16px 0;
         }
 
         .input-group {
@@ -117,88 +110,79 @@
         input[type="text"],
         input[type="number"] {
             width: 100%;
-            height: 56px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
+            height: 52px;
             border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(255,255,255,.04);
             color: white;
             padding: 0 16px;
-            outline: none;
             font-size: 15px;
+            outline: none;
         }
 
         input::placeholder {
-            color: #8b93a7;
+            color: #8f98ae;
         }
 
         .btn {
             width: 100%;
-            height: 56px;
+            height: 54px;
             border: none;
             border-radius: 14px;
-            color: white;
-            font-weight: 700;
-            font-size: 15px;
             cursor: pointer;
-            background: linear-gradient(
-                135deg,
-                var(--primary),
-                var(--primary2)
-            );
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: .6;
-            cursor: not-allowed;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #8b5cf6
+                );
         }
 
         .progress-wrapper {
-            margin-top: 18px;
-            height: 10px;
+            margin-top: 16px;
+            height: 8px;
             background: rgba(255,255,255,.08);
             border-radius: 999px;
             overflow: hidden;
         }
 
         .progress-bar {
-            width: 0%;
+            width: 0;
             height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(
-                90deg,
-                var(--primary),
-                var(--primary2)
-            );
-            transition: width .3s ease;
+            background:
+                linear-gradient(
+                    90deg,
+                    #667eea,
+                    #8b5cf6
+                );
+            transition: .3s;
         }
 
         .status {
-            margin-top: 10px;
             text-align: center;
-            color: #9fb4ff;
+            margin-top: 10px;
+            color: #a9b7ff;
             font-size: 13px;
         }
 
         .preview {
-            margin-top: 20px;
-            max-height: 300px;
-            overflow-y: auto;
+            margin-top: 18px;
             border-radius: 14px;
-            background: rgba(255,255,255,.03);
-            border: 1px solid var(--border);
+            overflow: hidden;
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,.08);
         }
 
         .preview li {
             list-style: none;
-            padding: 12px 14px;
+            padding: 12px;
+            font-size: 14px;
             border-bottom: 1px solid rgba(255,255,255,.05);
             word-break: break-word;
-            font-size: 14px;
         }
 
         .preview li:last-child {
@@ -213,47 +197,32 @@
 
             .card {
                 padding: 18px;
-                border-radius: 20px;
             }
 
             .header h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
 
-            .header p {
-                font-size: 13px;
+            .upload-icon {
+                font-size: 42px;
             }
 
-            .dropzone {
-                padding: 28px 14px;
-            }
-
-            .dropzone .icon {
-                font-size: 36px;
-            }
-
-            .dropzone h3 {
+            .upload-title {
                 font-size: 18px;
             }
 
-            .dropzone p {
-                font-size: 13px;
+            .upload-box {
+                padding: 20px 12px;
             }
 
             input[type="text"],
             input[type="number"],
             .btn {
-                height: 52px;
-                font-size: 16px;
+                height: 50px;
             }
 
             .preview {
-                max-height: 220px;
-            }
-
-            .preview li {
-                font-size: 13px;
-                padding: 10px 12px;
+                max-height: 180px;
             }
         }
     </style>
@@ -261,277 +230,270 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="card">
+    <div class="card">
 
-            <div class="header">
-                <h1>📸 Bulk Image Renamer</h1>
-                <p>Rename hundreds of images and download them as a ZIP</p>
-            </div>
-
-            <label class="dropzone" id="dropzone">
-
-                <input
-                    type="file"
-                    id="files"
-                    multiple
-                    accept="image/*">
-
-                <div class="icon">📁</div>
-
-                <h3>Drag & Drop Images</h3>
-
-                <p>or tap here to browse</p>
-
-            </label>
-
-            <div class="file-count" id="fileCount">
-                No files selected
-            </div>
-
-            <div class="input-group">
-                <input
-                    type="text"
-                    id="prefix"
-                    placeholder="Prefix (Example: MC)">
-            </div>
-
-            <div class="input-group">
-                <input
-                    type="number"
-                    id="startNumber"
-                    placeholder="Start Number (Example: 1)">
-            </div>
-
-            <button
-                class="btn"
-                id="renameBtn"
-                onclick="renameAndZip()">
-                Rename & Download ZIP
-            </button>
-
-            <div class="progress-wrapper">
-                <div
-                    class="progress-bar"
-                    id="progressBar">
-                </div>
-            </div>
-
-            <div class="status" id="status"></div>
-
-            <ul class="preview" id="preview"></ul>
-
+        <div class="header">
+            <h1>📸 Bulk Image Renamer</h1>
+            <p>Rename hundreds of images and download as ZIP</p>
         </div>
+
+        <label class="upload-box" id="dropzone">
+
+            <input
+                type="file"
+                id="files"
+                multiple
+                accept="image/*">
+
+            <div class="upload-icon">📁</div>
+
+            <div class="upload-title">
+                Select Images
+            </div>
+
+            <div class="upload-subtitle">
+                Tap to browse or drag & drop
+            </div>
+
+        </label>
+
+        <div
+            class="file-count"
+            id="fileCount">
+            No files selected
+        </div>
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="prefix"
+                placeholder="Prefix (Example: MC)">
+        </div>
+
+        <div class="input-group">
+            <input
+                type="number"
+                id="startNumber"
+                placeholder="Start Number (Example: 1)">
+        </div>
+
+        <button
+            class="btn"
+            id="renameBtn"
+            onclick="renameAndZip()">
+            Rename & Download ZIP
+        </button>
+
+        <div class="progress-wrapper">
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+        </div>
+
+        <div
+            class="status"
+            id="status">
+        </div>
+
+        <ul
+            class="preview"
+            id="preview">
+        </ul>
 
     </div>
 
-    <script>
+</div>
 
-        const fileInput =
-            document.getElementById("files");
+<script>
 
-        const fileCount =
-            document.getElementById("fileCount");
+const fileInput =
+    document.getElementById("files");
 
-        const dropzone =
-            document.getElementById("dropzone");
+const fileCount =
+    document.getElementById("fileCount");
 
-        fileInput.addEventListener(
-            "change",
-            updateCount
+const dropzone =
+    document.getElementById("dropzone");
+
+fileInput.addEventListener(
+    "change",
+    updateCount
+);
+
+function updateCount() {
+
+    fileCount.textContent =
+        `${fileInput.files.length} image(s) selected`;
+}
+
+dropzone.addEventListener(
+    "dragover",
+    (e) => {
+
+        e.preventDefault();
+
+        dropzone.classList.add(
+            "dragover"
+        );
+    }
+);
+
+dropzone.addEventListener(
+    "dragleave",
+    () => {
+
+        dropzone.classList.remove(
+            "dragover"
+        );
+    }
+);
+
+dropzone.addEventListener(
+    "drop",
+    (e) => {
+
+        e.preventDefault();
+
+        dropzone.classList.remove(
+            "dragover"
         );
 
-        function updateCount() {
+        fileInput.files =
+            e.dataTransfer.files;
 
-            const total =
-                fileInput.files.length;
+        updateCount();
+    }
+);
 
-            fileCount.textContent =
-                total === 0
-                    ? "No files selected"
-                    : `${total} image(s) selected`;
+async function renameAndZip() {
+
+    const files =
+        Array.from(fileInput.files);
+
+    const prefix =
+        document.getElementById(
+            "prefix"
+        ).value.trim();
+
+    const startNumber =
+        parseInt(
+            document.getElementById(
+                "startNumber"
+            ).value
+        );
+
+    if (
+        !files.length ||
+        !prefix ||
+        isNaN(startNumber)
+    ) {
+        alert(
+            "Please fill all fields."
+        );
+        return;
+    }
+
+    const preview =
+        document.getElementById(
+            "preview"
+        );
+
+    const progressBar =
+        document.getElementById(
+            "progressBar"
+        );
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+    preview.innerHTML = "";
+
+    const zip = new JSZip();
+
+    files.sort((a,b)=>
+        a.name.localeCompare(
+            b.name,
+            undefined,
+            {numeric:true}
+        )
+    );
+
+    for (
+        let i = 0;
+        i < files.length;
+        i++
+    ) {
+
+        const file =
+            files[i];
+
+        const ext =
+            file.name.split(".").pop();
+
+        const newName =
+            `${prefix} (${startNumber + i}).${ext}`;
+
+        if (i < 20) {
+            preview.innerHTML +=
+                `<li>${newName}</li>`;
         }
 
-        dropzone.addEventListener(
-            "dragover",
-            (e) => {
-                e.preventDefault();
-                dropzone.classList.add("dragover");
-            }
+        zip.file(
+            newName,
+            await file.arrayBuffer()
         );
 
-        dropzone.addEventListener(
-            "dragleave",
-            () => {
-                dropzone.classList.remove("dragover");
-            }
-        );
+        progressBar.style.width =
+            ((i + 1) /
+            files.length * 50)
+            + "%";
 
-        dropzone.addEventListener(
-            "drop",
-            (e) => {
+        status.textContent =
+            `Processing ${i + 1} of ${files.length}`;
+    }
 
-                e.preventDefault();
-
-                dropzone.classList.remove(
-                    "dragover"
-                );
-
-                fileInput.files =
-                    e.dataTransfer.files;
-
-                updateCount();
-            }
-        );
-
-        async function renameAndZip() {
-
-            const files =
-                Array.from(fileInput.files);
-
-            const prefix =
-                document
-                    .getElementById("prefix")
-                    .value.trim();
-
-            const startNumber =
-                parseInt(
-                    document.getElementById(
-                        "startNumber"
-                    ).value
-                );
-
-            const preview =
-                document.getElementById(
-                    "preview"
-                );
-
-            const progressBar =
-                document.getElementById(
-                    "progressBar"
-                );
-
-            const status =
-                document.getElementById(
-                    "status"
-                );
-
-            const button =
-                document.getElementById(
-                    "renameBtn"
-                );
-
-            preview.innerHTML = "";
-
-            if (
-                !files.length ||
-                !prefix ||
-                isNaN(startNumber)
-            ) {
-                alert(
-                    "Please select images and fill all fields."
-                );
-                return;
-            }
-
-            button.disabled = true;
-
-            files.sort((a, b) =>
-                a.name.localeCompare(
-                    b.name,
-                    undefined,
-                    { numeric: true }
-                )
-            );
-
-            const zip = new JSZip();
-
-            for (
-                let i = 0;
-                i < files.length;
-                i++
-            ) {
-
-                const file = files[i];
-
-                const extension =
-                    file.name.split(".").pop();
-
-                const newName =
-                    `${prefix} (${startNumber + i}).${extension}`;
-
-                if (i < 20) {
-                    preview.innerHTML +=
-                        `<li>${newName}</li>`;
-                }
-
-                zip.file(
-                    newName,
-                    await file.arrayBuffer()
-                );
-
-                const progress =
-                    ((i + 1) /
-                        files.length) * 50;
+    const blob =
+        await zip.generateAsync(
+            {
+                type: "blob",
+                compression: "DEFLATE"
+            },
+            (meta) => {
 
                 progressBar.style.width =
-                    progress + "%";
-
-                status.textContent =
-                    `Processing ${i + 1} of ${files.length}`;
+                    (50 +
+                    meta.percent / 2)
+                    + "%";
             }
+        );
 
-            status.textContent =
-                "Creating ZIP...";
+    const url =
+        URL.createObjectURL(blob);
 
-            const blob =
-                await zip.generateAsync(
-                    {
-                        type: "blob",
-                        compression: "DEFLATE",
-                        compressionOptions: {
-                            level: 6
-                        }
-                    },
-                    (metadata) => {
+    const a =
+        document.createElement("a");
 
-                        progressBar.style.width =
-                            (50 +
-                                metadata.percent / 2)
-                            + "%";
-                    }
-                );
+    a.href = url;
+    a.download =
+        "renamed-images.zip";
 
-            const url =
-                URL.createObjectURL(blob);
+    a.click();
 
-            const a =
-                document.createElement("a");
+    URL.revokeObjectURL(url);
 
-            a.href = url;
-            a.download =
-                "renamed-images.zip";
+    progressBar.style.width =
+        "100%";
 
-            document.body.appendChild(a);
+    status.textContent =
+        "Download Complete";
+}
 
-            a.click();
-
-            a.remove();
-
-            URL.revokeObjectURL(url);
-
-            progressBar.style.width =
-                "100%";
-
-            status.textContent =
-                `Completed! ${files.length} images renamed.`;
-
-            button.disabled = false;
-        }
-
-    </script>
+</script>
 
 </body>
-
-    </html>
+</html>
